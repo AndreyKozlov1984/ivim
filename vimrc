@@ -30,7 +30,6 @@
 "   -> EasyTags
 "   -> SingleCompile
 "   -> Zencoding
-"   -> Golden Ratio
 "   -> Splitjoin
 "   -> Unite
 "   -> vimux
@@ -99,9 +98,6 @@
 "   > Zencoding - https://github.com/mattn/zencoding-vim
 "     High-speed HTML, XML, XSL coding and editing
 "     info -> :help zencoding.txt
-"   > Golden Ratio - https://github.com/roman/golden-ratio
-"     Resize windows automatically using the Golden Ratio
-"     info -> :help golden_ratio.txt
 "   > Splitjoin - https://github.com/AndrewRadev/splitjoin.vim
 "     Switch between a single-line statement and a multi-line one
 "     info -> :help splitjoin.txt
@@ -168,16 +164,17 @@ set hidden " Turn on hidden"
 
 set history=1000 " Increase the lines of history
 set clipboard+=unnamed " Yanks go on clipboard instead
-set spell " Spell checking on
+set nospell " Spell checking on
 set modeline " Turn on modeline
 set encoding=utf-8 " Set utf-8 encoding
 set completeopt+=longest " Optimize auto complete
 set completeopt-=preview " Optimize auto complete
 
 set mousehide " Hide mouse after chars typed
-set mouse=a " Mouse in all modes
+set mouse-=a " Mouse in all modes
 
-set backup " Set backup
+set nobackup " Set backup
+set noswapfile 
 set undofile " Set undo
 
 " Set directories
@@ -247,7 +244,6 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mutewinter/vim-indent-guides'
-Bundle 'roman/golden-ratio'
 Bundle 'chrisbra/NrrwRgn'
 " Navigation
 Bundle 'Lokaltog/vim-easymotion'
@@ -303,6 +299,7 @@ Bundle 'honza/snipmate-snippets'
 if filereadable(expand("~/.vimrc.bundles.local"))
     source ~/.vimrc.bundles.local
 endif
+Bundle 'ZeusTheTrueGod/vim-format-js.git'
 
 filetype plugin indent on " Required!
 
@@ -315,47 +312,6 @@ filetype plugin indent on " Required!
 " Set title
 set title
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\ %{v:servername}
-
-" Set tabline
-set showtabline=2 " Always show tab line
-" Set up tab labels
-set guitablabel=%m%N:%t\[%{tabpagewinnr(v:lnum)}\]
-set tabline=%!MyTabLine()
-function! MyTabLine()
-    let s=''
-    let t=tabpagenr() " The index of current page
-    let i=1
-    while i<=tabpagenr('$') " From the first page
-      let buflist=tabpagebuflist(i)
-      let winnr=tabpagewinnr(i)
-      let s.=(i==t?'%#TabLineSel#':'%#TabLine#')
-      let s.='%'.i.'T'
-      let s.=' '
-      let bufnr=buflist[winnr - 1]
-      let file=bufname(bufnr)
-      let m=''
-      if getbufvar(bufnr, "&modified")
-          let m='[+]'
-      endif
-      if file=~'\/.'
-          let file=substitute(file,'.*\/\ze.','','')
-      endif
-      if file==''
-        let file='[No Name]'
-      endif
-      let s.=m
-      let s.=i.':'
-      let s.=file
-      let s.='['.winnr.']'
-      let s.=' '
-      let i=i+1
-    endwhile
-    let s.='%T%#TabLineFill#%='
-    let s.=(tabpagenr('$')>1?'%999XX':'X')
-    return s
-  endfunction
-" Set up tab tooltips with every buffer name
-set guitabtooltip=%F
 
 " Set status line
 set laststatus=2 " Show the statusline
@@ -402,18 +358,18 @@ nnoremap <Leader>n :call ToggleRelativenumber()<CR>
 set formatoptions+=rnlmM " Optimize format options
 set wrap " Set wrap
 set textwidth=80 " Change text width
-set colorcolumn=+1 " Indicate text border
-set list " Show these tabs and spaces and so on
+set colorcolumn=0 " Indicate text border
+set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
 set linebreak " Wrap long lines at a blank
 set showbreak=↪  " Change wrap line break
 set fillchars=diff:⣿,vert:│ " Change fillchars
 " Only show trailing whitespace when not in insert mode
-augroup trailing
-    autocmd!
-    autocmd InsertEnter * :set listchars-=trail:⌴
-    autocmd InsertLeave * :set listchars+=trail:⌴
-augroup END
+" augroup trailing
+    " autocmd!
+    " autocmd InsertEnter * :set listchars-=trail:⌴
+    " autocmd InsertLeave * :set listchars+=trail:⌴
+" augroup END
 
 " Set gVim UI setting
 if has('gui_running')
@@ -429,11 +385,11 @@ endif
 "-------------------------------------------------
 
 syntax on " Enable syntax
-set background=dark " Set background
+set background=light " Set background
 if !has('gui_running')
     set t_Co=256 " Use 256 colors
 endif
-colorscheme hybrid " Load a colorscheme
+colorscheme solarized " Load a colorscheme
 
 nnoremap <silent>\t :colorscheme Tomorrow-Night-Eighties<CR>
 nnoremap <silent>\j :colorscheme jellybeans<CR>
@@ -923,15 +879,6 @@ let g:user_zen_leader_key='<C-Z>'
 let g:user_zen_settings={'indentation':'   '}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"--------------------------------------------------
-" => Golden Ratio
-"--------------------------------------------------
-
-" Disable Golden Ratio plugin when in diff mode
-if &diff
-  let g:loaded_golden_ratio=1
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
