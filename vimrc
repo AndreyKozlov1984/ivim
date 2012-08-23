@@ -54,6 +54,7 @@ Bundle 'swaroopch/vim-markdown-preview'
 Bundle 'sampsyo/autolink.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'ZeusTheTrueGod/vim-format-js.git'
+Bundle 'rodjek/vim-puppet'
 
 " Others
 if executable('ctags')
@@ -130,8 +131,7 @@ set showmatch
 set matchpairs=(:),{:},[:],<:>
 
 " Search and replace
-set gdefault        " Make regexp matches everything, instead of just
-the first one 
+set gdefault        " Make regexp matches everything, instead of just the first one 
 set incsearch       " Search all instances
 set hlsearch        " Highlight matched regexp 
 set ignorecase
@@ -367,27 +367,9 @@ let NERDCommentWholeLinesInVMode=2
 let NERDSpaceDelims=1
 let NERDRemoveExtraSpaces=1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"--------------------------------------------------
-" => snipMate
-"--------------------------------------------------
-
-let g:snips_trigger_key=',,s'
-let g:snips_trigger_key_backwards=',,s'
-snoremap <CR> a<BS>
-snoremap <BS> a<BS>
-snoremap <right> <ESC>a
-snoremap <left> <ESC>bi
-snoremap ' a<BS>'
-snoremap ` a<BS>`
-snoremap % a<BS>%
-snoremap U a<BS>U
-snoremap ^ a<BS>^
-snoremap \ a<BS>\
-snoremap <C-x> a<BS><c-x>` `' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "--------------------------------------------------
