@@ -29,9 +29,9 @@ which ctags || warn "No ctags installed!\nPlease install ctags form http://ctags
 
 # back up existing vim stuff
 printf '\033[0;34m%s\033[0m\n' "Backing up current vim config..."
-for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc; do [ -e $i ] && mv -f $i $i.backup; done
+rm -rf $HOME/.vim
+rm $HOME/.vimrc
 
-# install ivim
 printf '\033[0;34m%s\033[0m\n' "Cloning ivim..."
 rm -rf $HOME/ivim
 git clone http://github.com/ZeusTheTrueGod/ivim.git $HOME/ivim
