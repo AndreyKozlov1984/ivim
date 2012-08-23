@@ -52,6 +52,8 @@ Bundle 'tpope/vim-rails'
 Bundle 'mattn/zencoding-vim'
 Bundle 'swaroopch/vim-markdown-preview'
 Bundle 'sampsyo/autolink.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'ZeusTheTrueGod/vim-format-js.git'
 
 " Others
 if executable('ctags')
@@ -61,7 +63,6 @@ Bundle 'tpope/vim-repeat'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/snipmate-snippets'
-Bundle 'ZeusTheTrueGod/vim-format-js.git'
 
 "Fix vim defaults
 let mapleader=',' " Change the mapleader
@@ -93,11 +94,6 @@ set statusline=%f
 set showcmd
 set showmode
 set nu
-
-" Source the vimrc file after saving it
-autocmd BufWritePost .vimrc source $MYVIMRC
-" Fast edit the .vimrc file using ',v'
-nnoremap <Leader>x :tabedit $MYVIMRC<CR>
 
 set autoread " Set autoread when a file is changed outside
 set autowriteall " Write on make/shell commands
@@ -166,7 +162,6 @@ set colorcolumn=0 " Indicate text border
 set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
 set linebreak " Wrap long lines at a blank
-set showbreak=↪  " Change wrap line break
 set fillchars=diff:⣿,vert:│ " Change fillchars
 
 " COLORCHEMES
@@ -475,3 +470,8 @@ nnoremap <Leader>vq :VimuxCloseRunner<CR>
 nnoremap <Leader>vi :VimuxInspectRunner<CR>
 nnoremap <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>vc :VimuxClearRunnerHistory<CR>
+
+
+if filereadable("vimrc") 
+    source vimrc 
+endif
