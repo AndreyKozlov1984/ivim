@@ -44,6 +44,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-abolish'
 Bundle 'godlygeek/tabular'
 Bundle 'mutewinter/swap-parameters'
+Bundle 'vim-scripts/bufkill.vim'
 " Automatic Helper
 Bundle 'garbas/vim-snipmate'
 Bundle 'Raimondi/delimitMate'
@@ -307,6 +308,7 @@ let NERDTreeShowBookmarks=0
 let NERDTreeShowHidden=1
 let NERDTreeShowLineNumbers=0
 let NERDTreeDirArrows=1
+let NERDTreeAutoDeleteBuffer=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "--------------------------------------------------
@@ -326,9 +328,9 @@ let NERDRemoveExtraSpaces=1
 " => delimitMate
 "--------------------------------------------------
 
-let delimitMate_expand_cr=1
-let delimitMate_expand_space=1
-let delimitMate_balance_matchpairs=1
+let delimitMate_smart_quotes = 1
+let delimitMate_visual_leader = ""
+let delimitMate_autoclose = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "--------------------------------------------------
@@ -360,7 +362,7 @@ endif
 
 nnoremap <Leader>s :Errors<CR>
 let g:syntastic_check_on_open=1
-let g:syntastic_auto_jump=1
+let g:syntastic_auto_jump=0
 let g:syntastic_stl_format='[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=0
