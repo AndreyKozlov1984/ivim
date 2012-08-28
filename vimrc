@@ -168,7 +168,10 @@ set fillchars=diff:⣿,vert:│ " Change fillchars
 
 " COLORCHEMES
 let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' } 
-colorscheme zenesque 
+"protect for the first start when no colorscheme is installed
+if !empty(globpath(&rtp, 'colors/zenesque.vim'))
+    colorscheme zenesque 
+endif
 
 nnoremap <silent>\t :colorscheme Tomorrow-Night-Eighties<CR>
 nnoremap <silent>\j :colorscheme jellybeans<CR>
