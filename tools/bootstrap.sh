@@ -41,4 +41,4 @@ printf '\033[0;34m%s\033[0m\n' "Installing Vundle..."
 git clone http://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
 
 printf '\033[0;34m%s\033[0m\n' "Installing plugins using Vundle..."
-vim +'set nospell' +BundleInstall! +BundleClean! +qa! $HOME/ivim/tools/info.txt < /dev/tty > /dev/tty 
+vim +'set nospell' +BundleInstall! +BundleClean! +qa! $HOME/ivim/tools/info.txt < /dev/tty > /dev/null 
