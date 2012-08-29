@@ -1,13 +1,13 @@
 set nocompatible
 
-let iCanHazVundle=1
+let isVundleInstalled=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(vundle_readme)
     echo "Installing Vundle.."
     echo ""
     silent !mkdir -p ~/.vim/bundle
     silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    let iCanHazVundle=0
+    let isVundleInstalled=0
 endif
 
 "*** Prepare to load bundles ***
@@ -78,7 +78,7 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/snipmate-snippets'
 
-if iCanHazVundle == 0
+if isVundleInstalled == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
     :BundleInstall

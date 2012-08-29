@@ -11,12 +11,6 @@ die ()
     exit 1
 }
 printf '\033[0;34m%s\033[0m\n' "Thanks for installing ivim!"
-printf '\033[0;34m%s\033[0m\n' '    _       _         '
-printf '\033[0;34m%s\033[0m\n' '   (_)   __(_)___ ___ '
-printf '\033[0;34m%s\033[0m\n' '  / / | / / / __ `__ \'
-printf '\033[0;34m%s\033[0m\n' ' / /| |/ / / / / / / /'
-printf '\033[0;34m%s\033[0m\n' '/_/ |___/_/_/ /_/ /_/ '
-printf '\033[0;34m%s\033[0m\n' '                      '
                       
 # check requriements
 printf '\033[0;34m%s\033[0m\n' "Checking requriements for ivim..."
@@ -27,18 +21,12 @@ which git || die "No git installed!\nPlease install git from http://git-scm.com/
 printf '\033[0;34m%s\033[0m\n' "Check if ctags exists..."
 which ctags || warn "No ctags installed!\nPlease install ctags form http://ctags.sourceforge.net/ after ivim intallation!"
 
-# back up existing vim stuff
-printf '\033[0;34m%s\033[0m\n' "Backing up current vim config..."
 rm -rf $HOME/.vim
 rm $HOME/.vimrc
 
 printf '\033[0;34m%s\033[0m\n' "Cloning ivim..."
 rm -rf $HOME/ivim
+
 git clone http://github.com/ZeusTheTrueGod/ivim.git $HOME/ivim
 ln -s $HOME/ivim/vimrc $HOME/.vimrc
 
-printf '\033[0;34m%s\033[0m\n' "Installing Vundle..."
-git clone http://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
-
-printf '\033[0;34m%s\033[0m\n' "Installing plugins using Vundle..."
-vim +'set nospell' +BundleInstall! +BundleClean! +qa! $HOME/ivim/tools/info.txt < /dev/tty > /dev/null 
