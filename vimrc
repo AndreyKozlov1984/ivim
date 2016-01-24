@@ -62,12 +62,11 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/syntastic'
 " Language related
 Bundle 'tpope/vim-rails'
-Bundle 'mattn/zencoding-vim'
 Bundle 'swaroopch/vim-markdown-preview'
 Bundle 'sampsyo/autolink.vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'jsx/jsx.vim'
 Bundle 'ZeusTheTrueGod/vim-format-js.git'
-Bundle 'rodjek/vim-puppet'
 
 " Others
 "if executable('ctags')
@@ -114,6 +113,19 @@ set showcmd
 set showmode
 set nu
 
+"for mac
+map <D-1> 1gt
+map <D-2> 2gt
+map <D-3> 3gt
+map <D-4> 4gt
+map <D-5> 5gt
+map <D-6> 6gt
+map <D-7> 7gt
+map <D-8> 8gt
+map <D-9> 9gt
+map <D-t> :tabnew<CR>
+map <D-w> :tabclose<CR>
+
 set autoread " Set autoread when a file is changed outside
 set autowriteall " Write on make/shell commands
 set hidden " Turn on hidden"
@@ -158,7 +170,7 @@ set smartcase       " Intelligent case-smart searching
 
 " No sound on errors
 set noerrorbells
-set novisualbell
+set visualbell
 set t_vb=
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -384,7 +396,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_auto_jump=0
 let g:syntastic_stl_format='[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=0
+let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_auto_loc_list=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
