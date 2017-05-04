@@ -35,10 +35,10 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'coderifous/textobj-word-column.vim'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'sjl/gundo.vim'
-if executable('ctags')
+" if executable('ctags')
     Bundle 'majutsushi/tagbar'
-endif
-Bundle 'Shougo/unite.vim'
+" endif
+" Bundle 'Shougo/unite.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 if executable('ack-grep') || executable('ack')
@@ -47,35 +47,38 @@ endif
 if executable('git')
     Bundle 'tpope/vim-fugitive'
 endif
-Bundle 'benmills/vimux'
-Bundle 'ZoomWin'
+" Bundle 'benmills/vimux'
+" Bundle 'ZoomWin'
 " Commands
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-abolish'
-Bundle 'godlygeek/tabular'
-Bundle 'mutewinter/swap-parameters'
-Bundle 'vim-scripts/bufkill.vim'
+" Bundle 'godlygeek/tabular'
+" Bundle 'mutewinter/swap-parameters'
+" Bundle 'vim-scripts/bufkill.vim'
 " Automatic Helper
-Bundle 'garbas/vim-snipmate'
-Bundle 'Raimondi/delimitMate'
+" Bundle 'garbas/vim-snipmate'
+" Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/syntastic'
 " Language related
 Bundle 'tpope/vim-rails'
 Bundle 'swaroopch/vim-markdown-preview'
 Bundle 'sampsyo/autolink.vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'flowtype/vim-flow'
+Bundle 'mxw/vim-jsx'
 Bundle 'jsx/jsx.vim'
-Bundle 'ZeusTheTrueGod/vim-format-js.git'
+Bundle 'sbdchd/neoformat'
+Bundle 'editorconfig/editorconfig-vim'
 
 " Others
 "if executable('ctags')
 "   Bundle 'xolox/vim-easytags'
 "endif
-Bundle 'tpope/vim-repeat'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/snipmate-snippets'
+" Bundle 'tpope/vim-repeat'
+" Bundle 'MarcWeber/vim-addon-mw-utils'
+" Bundle 'tomtom/tlib_vim'
+" Bundle 'honza/snipmate-snippets'
 
 if isVundleInstalled == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -90,7 +93,7 @@ set nocompatible
 set lazyredraw
 set ttyfast
 set backspace=indent,eol,start  " backspace works as expected
-set nostartofline               " Make j/k respect the columns (after all, this is not a freaking typewriter) 
+set nostartofline               " Make j/k respect the columns (after all, this is not a freaking typewriter)
 set modeline                    " Respect modeline of the file (the famous "vi:noai:sw=3 ts=6" on the beginning of the files)
 set hidden                      " Avoid asking to save before hiding
 set enc=utf-8
@@ -101,13 +104,13 @@ filetype plugin on
 filetype indent on
 syntax on
 
-" Basic UI 
+" Basic UI
 set novisualbell
 set shm=atIWswxrnmlf
 set ruler
 set numberwidth=1
 set report=2
-set laststatus=2    
+set laststatus=2
 set statusline=%f
 set showcmd
 set showmode
@@ -161,9 +164,9 @@ set showmatch
 set matchpairs=(:),{:},[:],<:>
 
 " Search and replace
-set gdefault        " Make regexp matches everything, instead of just the first one 
+set gdefault        " Make regexp matches everything, instead of just the first one
 set incsearch       " Search all instances
-set hlsearch        " Highlight matched regexp 
+set hlsearch        " Highlight matched regexp
 set ignorecase
 set smartcase       " Intelligent case-smart searching
 
@@ -195,10 +198,10 @@ set linebreak " Wrap long lines at a blank
 set fillchars=diff:⣿,vert:│ " Change fillchars
 
 " COLORCHEMES
-let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' } 
+let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
 "protect for the first start when no colorscheme is installed
 if !empty(globpath(&rtp, 'colors/zenesque.vim'))
-    colorscheme zenesque 
+    colorscheme zenesque
 endif
 
 nnoremap <silent>\t :colorscheme Tomorrow-Night-Eighties<CR>
@@ -273,6 +276,11 @@ augroup ft_ruby
     " TODO
 augroup END
 
+augroup ft_javascript
+    autocmd!
+    autocmd BufWritePre * silent! Neoformat prettiereslint
+augroup END
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "-------------------------------------------------
@@ -312,19 +320,6 @@ vnoremap ; :
 
 " Strip all trailing whitespace in the current file
 nnoremap <Leader>q :%s/\s\+$//<CR>:let @/=''<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"--------------------------------------------------
-" => Tagbar
-"--------------------------------------------------
-
-nnoremap <Leader>t :TagbarToggle<CR>
-let g:tagbar_autofocus=1
-let g:tagbar_expand=1
-let g:tagbar_foldlevel=2
-let g:tagbar_ironchars=['▾', '▸']
-let g:tagbar_autoshowtag=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -385,6 +380,7 @@ if has('unix') && executable('ack-grep')
     let g:ackprg='ack-grep -H --nocolor --nogroup --column'
 endif
 
+let g:jsx_ext_required = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "--------------------------------------------------
@@ -398,6 +394,7 @@ let g:syntastic_stl_format='[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_auto_loc_list=1
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -422,18 +419,5 @@ endif
 nnoremap <Leader>u :GundoToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"--------------------------------------------------
-" => vimux
-"--------------------------------------------------
-
-nnoremap <Leader>vp :VimuxPromptCommand<CR>
-vnoremap <Leader>vs "vy :call VimuxRunCommand(@v . "\n", 0)<CR>
-nnoremap <Leader>vx :VimuxClosePanes<CR>
-nnoremap <Leader>vq :VimuxCloseRunner<CR>
-nnoremap <Leader>vi :VimuxInspectRunner<CR>
-nnoremap <Leader>vl :VimuxRunLastCommand<CR>
-nnoremap <Leader>vc :VimuxClearRunnerHistory<CR>
 
 set exrc
